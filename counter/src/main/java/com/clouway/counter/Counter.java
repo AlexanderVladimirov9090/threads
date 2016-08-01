@@ -2,12 +2,16 @@ package com.clouway.counter;
 
 /**
  * Created by zumba on 01.08.16.
+ *
+ * @author Alexander Vladimirov
+ *         <alexandervladimirov1902@gmail.com>
+ *
  */
-public class Counter extends Thread {
+class Counter extends Thread {
     private final int max;
     private int count;
 
-    public Counter(int max) {
+    Counter(int max) {
         this.max = max;
     }
 
@@ -15,6 +19,11 @@ public class Counter extends Thread {
         System.out.println(increase());
     }
 
+    /**
+     * Increase count after 1000 milliseconds.
+     *
+     * @return Last counted number till reaching max or interrupted.
+     */
     private String increase() {
         while (count < max) {
             try {

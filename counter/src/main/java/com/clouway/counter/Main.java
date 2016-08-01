@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 
 /**
  * Created by zumba on 29.07.16.
+ *
+ * @author Alexander Vladimirov
+ *         <alexandervladimirov1902@gmail.com>
+ *
  */
 public class Main {
 
