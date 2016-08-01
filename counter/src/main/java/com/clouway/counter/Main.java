@@ -10,19 +10,21 @@ import java.io.InputStreamReader;
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        ThreadMonitor threadMonitor = new ThreadMonitor();
-        long threadStartTime = System.currentTimeMillis();
 
-        System.out.println("Count to:");
-        Thread thread = new Thread(new Counter(Integer.valueOf(bufferedReader.readLine())));
-
-        System.out.println("Enter delay in milli seconds:");
-        int waitTime = Integer.valueOf(bufferedReader.readLine());
-
-        thread.start();
-        threadMonitor.kill(thread, threadStartTime, waitTime);
+        try {
+            ThreadMonitor threadMonitor = new ThreadMonitor();
+            System.out.println("Thread count to:");
+            Thread thread = new Thread(new Counter(Integer.valueOf(bufferedReader.readLine())));
+            System.out.println("Enter delay in milli seconds:");
+            int waitTime = Integer.valueOf(bufferedReader.readLine());
+            long threadStartTime = System.currentTimeMillis();
+            thread.start();
+            threadMonitor.kill(thread, threadStartTime, waitTime);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
