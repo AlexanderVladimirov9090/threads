@@ -5,7 +5,6 @@ package com.clouway.counter;
  *
  * @author Alexander Vladimirov
  *         <alexandervladimirov1902@gmail.com>
- *
  */
 class Counter extends Thread {
     private final int max;
@@ -15,6 +14,7 @@ class Counter extends Thread {
         this.max = max;
     }
 
+    @Override
     public void run() {
         System.out.println(increase());
     }
