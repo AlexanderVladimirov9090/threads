@@ -31,7 +31,7 @@ public class CounterTest {
         System.out.println(threadMonitor.kill(thread,threadStartTime,11000));
         System.out.flush();
 
-        assertThat(systemOutString.toString(), is(equalTo("Thread-1 10\nnull\n")));
+        assertThat(systemOutString.toString(), is(equalTo("Thread-2 10\nnull\n")));
         System.setOut(old);
     }
 
@@ -49,7 +49,7 @@ public class CounterTest {
         System.out.println(threadMonitor.kill(thread,threadStartTime,1000));
         System.out.flush();
 
-        assertThat(systemOutString.toString(), is(equalTo("Thread-3 0\nThread-3 interrupted!\n")));
+        assertThat(systemOutString.toString(), is(equalTo("Thread-5 0\nThread-5 interrupted!\n")));
         System.setOut(old);
     }
 }

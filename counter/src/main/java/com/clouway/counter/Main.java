@@ -25,7 +25,7 @@ public class Main {
             int waitTime = Integer.valueOf(bufferedReader.readLine());
             long threadStartTime = System.currentTimeMillis();
             thread.start();
-            threadMonitor.kill(thread, threadStartTime, waitTime);
+            System.out.println(threadMonitor.kill(thread, threadStartTime, waitTime));
         } catch (IOException e) {
             e.printStackTrace();
         }

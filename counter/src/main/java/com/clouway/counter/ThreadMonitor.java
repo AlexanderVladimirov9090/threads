@@ -5,13 +5,14 @@ package com.clouway.counter;
  *
  * @author Alexander Vladimirov
  *         <alexandervladimirov1902@gmail.com>
- * This class monitors and interrupts Thread when delaying more than given time limit set by user.
+ *         This class monitors and interrupts Thread when delaying more than given time limit set by user.
  */
 class ThreadMonitor {
 
     /**
      * Kills thread if delays to much.
-     *  @param thread          monitored thread.
+     *
+     * @param thread          monitored thread.
      * @param threadStartTime life cycle of thread.
      * @param delay           time limit set by user.
      */
@@ -24,7 +25,7 @@ class ThreadMonitor {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return thread.getName()+" interrupted!";
+                return thread.getName() + " interrupted!";
             }
         }
         return null;
