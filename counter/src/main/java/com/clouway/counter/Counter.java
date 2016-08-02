@@ -9,6 +9,7 @@ package com.clouway.counter;
 class Counter extends Thread {
     private final int max;
     private int count;
+    private ThreadMonitor threadMonitor;
 
     Counter(int max) {
         this.max = max;
@@ -16,7 +17,7 @@ class Counter extends Thread {
 
     @Override
     public void run() {
-        System.out.println(increase());
+        System.out.println(increment());
     }
 
     /**
@@ -24,7 +25,7 @@ class Counter extends Thread {
      *
      * @return Last counted number till reaching max or interrupted.
      */
-    private String increase() {
+    private String increment() {
         while (count < max) {
             try {
                 Thread.sleep(1000);
