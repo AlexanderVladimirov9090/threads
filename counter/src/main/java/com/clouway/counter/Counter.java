@@ -9,7 +9,6 @@ package com.clouway.counter;
 class Counter extends Thread {
     private final int max;
     private int count;
-    private ThreadMonitor threadMonitor;
 
     Counter(int max) {
         this.max = max;
