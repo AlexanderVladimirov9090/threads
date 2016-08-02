@@ -52,5 +52,4 @@ public class CounterTest {
         assertThat(systemOutString.toString(), is(equalTo("Thread-3 interrupted!\nThread-3 0\n")));
         System.setOut(old);
     }
-
 }
