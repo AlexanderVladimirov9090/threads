@@ -28,10 +28,10 @@ public class CounterTest {
         System.setOut(ps);
         long threadStartTime= System.currentTimeMillis();
         thread.start();
-        threadMonitor.kill(thread,threadStartTime,11000);
+        System.out.println(threadMonitor.kill(thread,threadStartTime,11000));
         System.out.flush();
 
-        assertThat(systemOutString.toString(), is(equalTo("Thread-1 10\n")));
+        assertThat(systemOutString.toString(), is(equalTo("Thread-1 10\nnull\n")));
         System.setOut(old);
     }
 
@@ -46,10 +46,10 @@ public class CounterTest {
         System.setOut(ps);
         long threadStartTime = System.currentTimeMillis();
         thread.start();
-        threadMonitor.kill(thread,threadStartTime,1000);
+        System.out.println(threadMonitor.kill(thread,threadStartTime,1000));
         System.out.flush();
 
-        assertThat(systemOutString.toString(), is(equalTo("Thread-3 interrupted!\nThread-3 0\n")));
+        assertThat(systemOutString.toString(), is(equalTo("Thread-3 0\nThread-3 interrupted!\n")));
         System.setOut(old);
     }
 }
