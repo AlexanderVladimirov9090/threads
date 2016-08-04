@@ -1,7 +1,6 @@
 package com.clouway.counter;
 
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -20,7 +19,7 @@ public class CounterTest {
     @Test
     public void notInterruptedThread() throws Exception {
         Thread thread = new Thread(new Counter(10));
-        ThreadMonitor threadMonitor = new ThreadMonitor();
+        ThreadMonitor threadMonitor = new ThreadMonitor(killSymbol);
         ByteArrayOutputStream systemOutString = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(systemOutString);
         PrintStream old = System.out;
@@ -38,7 +37,7 @@ public class CounterTest {
     @Test
     public void interruptedThread(){
         Thread thread = new Thread(new Counter(10));
-        ThreadMonitor threadMonitor = new ThreadMonitor();
+        ThreadMonitor threadMonitor = new ThreadMonitor(killSymbol);
         ByteArrayOutputStream systemOutString = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(systemOutString);
         PrintStream old = System.out;

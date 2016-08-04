@@ -8,17 +8,21 @@ package com.clouway.counter;
  *         This class monitors and interrupts Thread when delaying more than given time limit set by user.
  */
 class ThreadMonitor {
+    private final String killSymbol;
+
+    ThreadMonitor(String killSymbol) {
+        this.killSymbol = killSymbol;
+    }
 
     /**
-     * Kills thread if delays to much.
-     *
-     * @param thread          monitored thread.
-     * @param threadStartTime life cycle of thread.
-     * @param delay           time limit set by user.
+     * Kills thread.
+     * @param thread targeted thread.
+     * @param kill command to kill thread.
+     * @return
      */
-    String kill(Thread thread, long threadStartTime, int delay) {
+    String kill(Thread thread, String kill) {
         while (thread.isAlive()) {
-            if (((System.currentTimeMillis() - threadStartTime) > delay) && thread.isAlive()) {
+            if (kill.equals(killSymbol) && thread.isAlive()) {
                 thread.interrupt();
                 try {
                     thread.join();

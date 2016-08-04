@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
  *
  * @author Alexander Vladimirov
  *         <alexandervladimirov1902@gmail.com>
- *
  */
 public class Main {
 
@@ -18,14 +17,13 @@ public class Main {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            ThreadMonitor threadMonitor = new ThreadMonitor();
             System.out.println("Thread count to:");
             Thread thread = new Thread(new Counter(Integer.valueOf(bufferedReader.readLine())));
-            System.out.println("Enter delay in milli seconds:");
-            int waitTime = Integer.valueOf(bufferedReader.readLine());
-            long threadStartTime = System.currentTimeMillis();
+            System.out.println("Enter word for thread kill:");
+            ThreadMonitor threadMonitor = new ThreadMonitor(bufferedReader.readLine());
+            System.out.println("Enter word to kill thread:");
             thread.start();
-            System.out.println(threadMonitor.kill(thread, threadStartTime, waitTime));
+            System.out.println(threadMonitor.kill(thread, String.valueOf(bufferedReader.readLine())));
         } catch (IOException e) {
             e.printStackTrace();
         }
