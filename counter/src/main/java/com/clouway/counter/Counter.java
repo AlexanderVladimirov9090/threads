@@ -6,7 +6,7 @@ package com.clouway.counter;
  * @author Alexander Vladimirov
  *         <alexandervladimirov1902@gmail.com>
  */
-class Counter extends Thread {
+class Counter implements Runnable {
     private final int max;
     private int count;
 
