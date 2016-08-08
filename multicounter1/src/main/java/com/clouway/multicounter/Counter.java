@@ -22,6 +22,9 @@ public class Counter extends Thread {
         this.interrupt();
     }
 
+    /**
+     * Counts to given maximum number prints every count and then prints that thread is finished and its name.
+     */
     private void count() {
         while (count < max) {
             try {
