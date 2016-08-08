@@ -12,7 +12,6 @@ class ThreadMonitor {
     /**
      * Kills thread.
      * @param thread targeted thread.
-     * @param kill command to kill thread.
      * @return
      */
     String kill(Thread thread) {
