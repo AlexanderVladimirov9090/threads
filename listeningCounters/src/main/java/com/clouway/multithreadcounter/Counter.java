@@ -1,4 +1,4 @@
-package java.com.clouway.multithreadcounter;
+package com.clouway.multithreadcounter;
 
 /**
  * Created by zumba on 04.08.16.
