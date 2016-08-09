@@ -6,16 +6,16 @@ package com.clouway.fixedsizelist;
  * @author Alexander Vladimirov
  *         <alexandervladimirov1902@gmail.com>
  */
-public class AddingManager implements Runnable {
+public class AddingManager extends Thread {
     private final FixedList fixedList;
-
     public AddingManager(FixedList fixedList) {
         this.fixedList = fixedList;
     }
 
+    @Override
     public void run() {
         synchronized (this) {
-
+            this.notifyAll();
             add();
         }
     }
@@ -24,22 +24,25 @@ public class AddingManager implements Runnable {
         while (true) {
 
             try {
+
+                System.out.println("\nAdded Item to Array. " + Thread.currentThread().getName());
                 fixedList.add(new Object());
-            }catch (ListFullException e){
+            } catch (ListFullException e) {
                 try {
+                    System.out.println("Wait removing thread because it is full.");
+                 this.notifyAll();
                     wait();
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
             }
-            System.out.println("Added Item From Array.");
             fixedList.printAllElements();
+            this.notifyAll();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            notifyAll();
         }
     }
 }

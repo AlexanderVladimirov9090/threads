@@ -9,11 +9,11 @@ package com.clouway.fixedsizelist;
 public class Main {
     public static void main(String[] args) {
 
-        FixedList fixedList = new FixedList(10);
+        FixedList fixedList = new FixedList(1);
 
-        synchronized (Thread.class) {
-            Thread addingMangerThread = new Thread(new AddingManager(fixedList));
-            Thread removingManagerThread = new Thread(new RemovingManager(fixedList));
+        synchronized (AddingManager.class) {
+            AddingManager addingMangerThread = new AddingManager(fixedList);
+            RemovingManager removingManagerThread = new RemovingManager(fixedList, addingMangerThread);
             addingMangerThread.start();
             removingManagerThread.start();
         }

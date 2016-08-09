@@ -6,15 +6,17 @@ package com.clouway.fixedsizelist;
  * @author Alexander Vladimirov
  *         <alexandervladimirov1902@gmail.com>
  */
-public class RemovingManager implements Runnable{
+public class RemovingManager extends Thread{
     private final FixedList fixedList;
-
-    public RemovingManager(FixedList fixedList) {
+    private final AddingManager addingManager;
+    public RemovingManager(FixedList fixedList, AddingManager addingManager) {
         this.fixedList = fixedList;
+        this.addingManager = addingManager;
     }
 
+    @Override
     public void run() {
-        synchronized (this){
+        synchronized (addingManager) {
 
             remove();
         }
@@ -22,26 +24,36 @@ public class RemovingManager implements Runnable{
 
     private void remove() {
         while (true) {
-
             try {
-                fixedList.remove();
-            }catch (ListEmptyException e){
 
-                try {
+                System.out.println("\nRemoving item." + Thread.currentThread().getName());
+                fixedList.remove();
+                addingManager.notifyAll();
+            } catch (ListEmptyException e) {
+             try {
+                addingManager.notifyAll();
                     wait();
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
-            }catch ( ArrayIndexOutOfBoundsException ignored){}
+            } catch (ArrayIndexOutOfBoundsException ignored) {
+                try {
+                    System.out.println("Waiting for other thread.");
+                addingManager.notifyAll();
+                addingManager.wait();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
 
-            System.out.println("Removed item from Array.");
+            System.out.println("Removed item from Array. " + Thread.currentThread().getName());
             fixedList.printAllElements();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            notifyAll();
+          addingManager.notifyAll();
         }
     }
 }
