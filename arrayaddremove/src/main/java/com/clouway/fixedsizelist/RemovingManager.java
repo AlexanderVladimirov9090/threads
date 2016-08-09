@@ -51,7 +51,6 @@ public class RemovingManager extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-           // addingManager.notifyAll();
         }
     }
 }
