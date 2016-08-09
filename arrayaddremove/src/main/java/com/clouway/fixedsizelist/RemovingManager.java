@@ -6,9 +6,10 @@ package com.clouway.fixedsizelist;
  * @author Alexander Vladimirov
  *         <alexandervladimirov1902@gmail.com>
  */
-public class RemovingManager extends Thread{
+public class RemovingManager extends Thread {
     private final FixedList fixedList;
     private final AddingManager addingManager;
+
     public RemovingManager(FixedList fixedList, AddingManager addingManager) {
         this.fixedList = fixedList;
         this.addingManager = addingManager;
@@ -17,30 +18,26 @@ public class RemovingManager extends Thread{
     @Override
     public void run() {
         synchronized (addingManager) {
-
             remove();
         }
     }
 
+    /**
+     * Removes item from array. When empty wait for Other thread.
+     */
     private void remove() {
         while (true) {
-            try {
 
+            try {
                 System.out.println("\nRemoving item." + Thread.currentThread().getName());
                 fixedList.remove();
                 addingManager.notifyAll();
-            } catch (ListEmptyException e) {
-             try {
-                addingManager.notifyAll();
-                    wait();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
-            } catch (ArrayIndexOutOfBoundsException ignored) {
+            }catch (ArrayIndexOutOfBoundsException ignored) {
+
                 try {
-                    System.out.println("Waiting for other thread.");
-                addingManager.notifyAll();
-                addingManager.wait();
+                    System.out.println("Waiting for other thread because array is empty.");
+                    addingManager.notifyAll();
+                    addingManager.wait();
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
@@ -48,12 +45,13 @@ public class RemovingManager extends Thread{
 
             System.out.println("Removed item from Array. " + Thread.currentThread().getName());
             fixedList.printAllElements();
+
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-          addingManager.notifyAll();
+           // addingManager.notifyAll();
         }
     }
 }

@@ -9,7 +9,7 @@ package com.clouway.fixedsizelist;
 public class Main {
     public static void main(String[] args) {
 
-        FixedList fixedList = new FixedList(1);
+        FixedList fixedList = new FixedList(3);
 
         synchronized (AddingManager.class) {
             AddingManager addingMangerThread = new AddingManager(fixedList);

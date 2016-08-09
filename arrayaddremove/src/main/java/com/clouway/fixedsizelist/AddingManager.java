@@ -8,6 +8,7 @@ package com.clouway.fixedsizelist;
  */
 public class AddingManager extends Thread {
     private final FixedList fixedList;
+
     public AddingManager(FixedList fixedList) {
         this.fixedList = fixedList;
     }
@@ -15,29 +16,31 @@ public class AddingManager extends Thread {
     @Override
     public void run() {
         synchronized (this) {
-            this.notifyAll();
             add();
         }
     }
 
+    /**
+     * Adds new Object to array. Waits when full for other thread.
+     */
     private void add() {
         while (true) {
 
             try {
-
                 System.out.println("\nAdded Item to Array. " + Thread.currentThread().getName());
                 fixedList.add(new Object());
             } catch (ListFullException e) {
+
                 try {
-                    System.out.println("Wait removing thread because it is full.");
-                 this.notifyAll();
+                    System.out.println("Wait removing thread because array is full.");
+                    this.notifyAll();
                     wait();
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
             }
             fixedList.printAllElements();
-            this.notifyAll();
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
