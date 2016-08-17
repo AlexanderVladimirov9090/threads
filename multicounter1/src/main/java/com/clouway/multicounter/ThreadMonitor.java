@@ -9,23 +9,21 @@ package com.clouway.multicounter;
  */
 class ThreadMonitor {
 
-    /**
-     * Kills thread.
-     * @param thread targeted thread.
-     * @return
-     */
-    String kill(Thread thread) {
-        while (thread.isAlive()) {
-            if (thread.isAlive()&&Thread.activeCount()<4) {
-                thread.interrupt();
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return thread.getName() + " interrupted!";
-            }
+  /**
+   * Kills thread.
+   *
+   * @param thread targeted thread.
+   */
+  void kill(Thread thread) {
+    while (thread.isAlive()) {
+      if (thread.isAlive() && Thread.activeCount() < 4) {
+        thread.interrupt();
+        try {
+          thread.join();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
         }
-        return null;
+      }
     }
+  }
 }
