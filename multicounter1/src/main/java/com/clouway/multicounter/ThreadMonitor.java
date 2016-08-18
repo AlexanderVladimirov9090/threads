@@ -18,6 +18,7 @@ class ThreadMonitor {
     while (thread.isAlive()) {
       if (thread.isAlive() && Thread.activeCount() < 4) {
         thread.interrupt();
+
         try {
           thread.join();
         } catch (InterruptedException e) {

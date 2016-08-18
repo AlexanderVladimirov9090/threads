@@ -23,7 +23,7 @@ public class Main {
             ThreadMonitor threadMonitor = new ThreadMonitor(bufferedReader.readLine());
             System.out.println("Enter word to kill thread:");
             thread.start();
-            System.out.println(threadMonitor.kill(thread, String.valueOf(bufferedReader.readLine())));
+            threadMonitor.kill(thread, String.valueOf(bufferedReader.readLine()));
         } catch (IOException e) {
             e.printStackTrace();
         }
